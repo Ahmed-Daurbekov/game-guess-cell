@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="shortcut icon" href="./img/icon/icon.png" type="image/png">
+    <title>A-Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="controls">
+            <div class="timer__panel">
+                <div class="timer">
+                    <label>Время прошло:</label>
+                    <span class="seconds">00</span>
+                    <span class="minut">секунд</span>
+                    <i class="fas fa-angle-down"></i>
+                </div>
+            </div>
+            <br>
+            <div class="controls__panel">
+                <label for="">ВПАЯ в сек.:</label>
+                <input type="text" class="timeInput" value="2" placeholder="Время">
+                <label for="">Размер x*x:</label>
+                <input type="text" class="size" value="10" placeholder="Размер">
+                <label for="">Кол-во актив-ых ячеек:</label>
+                <input type="text" class="activeCells" value="10" placeholder="Кол-во ячеек">
+                <button class="start">Начать</button>
+                <button class="reboot" disabled>
+                    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M2.023 2.007h12v12h-12z" fill="#000"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    
+        <div class="field">
+            <div class="attempts">
+                <div class="attempts__title">У вас осталось:</div>
+                <div class="attempts__left"><span class="numberMisses">5</span> промахов из <span class="numberMissesFrom">5</span></div>
+                <input type="range" class="range" value="5" min="5" max="10">
+            </div>
+            
+            <div class="board">
+                <div class="game-over">
+                    <div class="game-over__title">Поле для игры</div>
+                    <div class="game-over__counter">Чтобы начать нажмите на кнопку<br><i>Начать</i></div>            
+                </div>
+            </div>
+        </div>
+         
+    </div>
+
+    <script src="./js/script.js"></script>
+</body>
+</html>

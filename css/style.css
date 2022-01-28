@@ -1,0 +1,132 @@
+body {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.instruction {
+    width: 100%;
+    height: 100%;
+    background: #a0a0a0;
+    position: absolute;
+    top: -100%;
+    transform: translateY(5%);
+    box-shadow: 0 0 5px #000;
+    /* transition: 0.5s ease; */
+}
+.instruction__down {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: -30px;
+    border-radius: 0 0 5px 5px;
+    background: #757575;
+    cursor: pointer;
+}
+.show-active {
+    background: green;
+}
+.controls {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.timer__panel {
+    margin: auto;
+}
+.controls__panel {
+    display: flex;
+}
+.timer {
+    display: flex;
+}
+.timer span {
+    font-size: 24px;
+    margin-left: 5px;
+}
+.timeInput, .size, .activeCells {
+    max-width: 50px;
+    padding-left: 5px;
+    font-size: 20px;
+    margin-left: 5px;
+    border-radius: 5px;
+}
+
+label {
+    font-size: 24px;
+    margin-left: 15px;
+}
+.start, .reboot {
+    padding-left: 5px;
+    font-size: 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0 0 2px #000;
+    cursor: pointer;
+}
+.reboot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.field {
+    display: flex;
+}
+.attempts {
+    font-size: 28px;
+    font-weight: bold;
+    margin-right: 25px;
+    min-width: 230px;
+    padding-left: 5px;
+}
+.board {
+    width: 566px;
+    height: 566px;
+    border: 1px solid #000;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+}
+.cell {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+}
+
+.game-over {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-weight: bold;
+}
+
+.game-over__title {
+    font-size: 36px;
+}
+
+.game-over__counter, .game-over__miss, .game-over__time {
+    font-size: 30px;
+}
+/*  */
