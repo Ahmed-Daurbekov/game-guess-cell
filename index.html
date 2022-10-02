@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <link rel="shortcut icon" href="./img/icon/icon.png" type="image/png">
     <title>A-Game</title>
     <link rel="stylesheet" href="css/style.css">
@@ -21,20 +20,24 @@
                     <i class="fas fa-angle-down"></i>
                 </div>
             </div>
-            <br>
             <div class="controls__panel">
-                <label for="">ВПАЯ в сек.:</label>
-                <input type="text" class="timeInput" value="2" placeholder="Время">
-                <label for="">Размер x*x:</label>
-                <input type="text" class="size" value="10" placeholder="Размер">
-                <label for="">Кол-во актив-ых ячеек:</label>
-                <input type="text" class="activeCells" value="10" placeholder="Кол-во ячеек">
-                <button class="start">Начать</button>
-                <button class="reboot" disabled>
-                    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M2.023 2.007h12v12h-12z" fill="#000"></path>
-                    </svg>
-                </button>
+                <label for="timeInput">ВПАЯ в сек.:
+                    <input id="timeInput" type="text" class="timeInput" value="2" placeholder="Время">
+                </label>
+                <label for="size">Размер x*x:
+                    <input id="size" type="text" class="size" value="10" placeholder="Размер">
+                </label>
+                <label for="activeCells">Кол-во актив-ых ячеек:
+                    <input id="activeCells" type="text" class="activeCells" value="10" placeholder="Кол-во ячеек">
+                </label>
+                <div style="display: flex; flex-wrap: wrap; margin: 5px 0;">
+                    <button class="start">Начать</button>
+                    <button class="reboot" disabled>
+                        <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.023 2.007h12v12h-12z" fill="#000"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     

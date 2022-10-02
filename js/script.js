@@ -9,6 +9,7 @@ let range = document.querySelector('.range')
 let counter = 0;
 let miss = 0;
 let attempts;
+let secund = 0
 
 start.addEventListener('click', game)
 document.addEventListener('keydown', (e) => {
@@ -17,7 +18,6 @@ document.addEventListener('keydown', (e) => {
     }
 })
 
-let secund = 0
 function timer() {
     secund++
     seconds.innerHTML = addZero(secund)
@@ -33,13 +33,17 @@ function addZero(a) {
 function setDisabled() {
     start.disabled = false
     reboot.disabled = true
-    range.disabled = false
+
+    document.querySelectorAll('input').forEach(input => {
+        input.disabled = false
+    })
 }
 range.addEventListener('input', () => {
     attempts = Number(range.value)
     numberMisses.innerHTML = attempts
     numberMissesFrom.innerHTML = attempts
 })
+
 function game() {
     counter = 0
     miss = 0
@@ -49,9 +53,10 @@ function game() {
     numberMissesFrom.innerHTML = attempts
 
     start.disabled = true
-    range.disabled = true
     reboot.disabled = false
-
+    document.querySelectorAll('input').forEach(input => {
+        input.disabled = true
+    })
     board.innerHTML = ''
     let field = parseInt(size.value) ** 2
     
@@ -92,6 +97,8 @@ function game() {
                         <div class="game-over__miss">Ваши промахи: <span class="miss">${miss}</span></div>
                     </div>
                     `
+                    secund = 0
+                    seconds.innerHTML = `00`
                 }
             } else if(item.classList.contains('show-active')) {
                 item.style.background = ''
@@ -163,22 +170,3 @@ function game() {
         setDisabled()
     })    
 }
-
-let addLS = document.querySelector('.addLS')
-let addLS2 = document.querySelector('.addLS2')
-let inp = document.querySelector('.input')
-// localStorage.setItem('a', '[{"a":"b","c":"d"},{"a":"g","c":"j"}]')
-let previous = localStorage.getItem('previous')
-// let df = JSON.parse(localStorage.getItem('a'))
-let arr = []
-addLS.addEventListener('click', () => {
-    let obj = {}
-    obj.img = `${inp.value}`
-    arr.push(obj)
-    localStorage.setItem('a', JSON.stringify(arr))
-    // console.log(df);
-})
-addLS2.addEventListener('click', () => {
-    let df = JSON.parse(localStorage.getItem('a'))
-    console.log(df);
-})
