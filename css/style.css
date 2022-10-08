@@ -94,6 +94,7 @@ label {
     align-items: center;
     justify-content: center;
     border-radius: 5px;
+    position: relative;
 }
 .cell {
     width: 50px;
@@ -121,9 +122,63 @@ label {
     font-size: 30px;
 }
 
-.size-error {
-    font-size: 30px;
-    font-weight: bold;
-    text-align: center;
-    display: none;
+/* медиа запросы */
+@media (max-width: 600px) {
+    .board {
+        width: 450px;
+        height: 450px;
+    }
+
+    .game-over__title {
+        font-size: 30px;
+    }
+    
+    .game-over__counter, .game-over__miss, .game-over__time, .size-error {
+        font-size: 26px;
+    }
+}
+
+@media (max-width: 485px) {
+    .board {
+        width: 370px;
+        height: 370px;
+    }
+
+    .game-over__title {
+        font-size: 30px;
+    }
+    
+    .game-over__counter, .game-over__miss, .game-over__time {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 430px) {
+    .board {
+        width: 310px;
+        height: 310px;
+    }
+
+    .game-over__title {
+        font-size: 28px;
+    }
+    
+    .game-over__counter, .game-over__miss, .game-over__time, .size-error {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 340px) {
+    .board {
+        width: 290px;
+        height: 290px;
+    }
+
+    .game-over__title {
+        font-size: 28px;
+    }
+    
+    .game-over__counter, .game-over__miss, .game-over__time {
+        font-size: 22px;
+    }
 }

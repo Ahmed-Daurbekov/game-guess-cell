@@ -45,151 +45,147 @@ range.addEventListener('input', () => {
 })
 
 function game() {
-    // console.log(document.querySelector('.board').offsetWidth);
-    // ===========
-    counter = 0
-    miss = 0
-
-    attempts = Number(range.value)
-    numberMisses.innerHTML = attempts
-    numberMissesFrom.innerHTML = attempts
-
-    start.disabled = true
-    reboot.disabled = false
-    document.querySelectorAll('input').forEach(input => {
-        input.disabled = true
-    })
-    board.innerHTML = ''
-    let field = parseInt(size.value) ** 2
-    // console.log(field);
-    for (let i = 1; i <= field; i++) {
-        let div = document.createElement('div')
-        div.classList.add('cell')
-        div.setAttribute('data-num', `${i}`)
-        div.innerHTML = i
-        board.append(div)
-    }
-
-    let interval = setInterval(timer, 1000);
-
-    let cells = document.querySelectorAll('.cell');
-    let arr = [];
-    let numberCells = document.querySelector('.activeCells')
-    let returnArr = randomNum(0, field)
+    let fieldSise = ((56*+size.value)+6)+20
+    let activeCells = Number(document.querySelector('.activeCells').value)
     
-    board.style.width = `${(cells[0].offsetWidth+4) * parseInt(size.value)}px`
-    board.style.height = `${(cells[0].offsetWidth+4) * parseInt(size.value)}px`
-    returnArr.forEach(item => {
-        cells[item].classList.add('cell-active')
-    })
-
-    cells.forEach(item => {
-        item.addEventListener('click', () => {
-            if(item.classList.contains('cell-active') && !item.classList.contains('show-active')) {
-                if (!item.classList.contains('active-cell__select')) {
-                    item.style.background = 'green'
-                    counter++
-                    item.classList.add('active-cell__select')
-                    if(counter == parseInt(numberCells.value)) {
-                        clearInterval(interval)
-                        setDisabled()
-                        board.innerHTML = `
-                        <div class="game-over">
-                            <div class="game-over__title">Вы выиграли</div>
-                            <div class="game-over__time">Вы справились за ${secund} секунд</div>
-                            <div class="game-over__counter">Ваш счет: <span class="recruited">${counter}</span></div>         
-                            <div class="game-over__miss">Ваши промахи: <span class="miss">${miss}</span></div>
-                        </div>
-                        `
-                        secund = 0
-                        seconds.innerHTML = `00`
+    console.log(Number(activeCells) <= Math.pow(Number(size.value), 2)-1);
+    if (Number(activeCells) <= Math.pow(Number(size.value), 2)-1) {
+        if (window.innerWidth > fieldSise) {
+            counter = 0
+            miss = 0
+        
+            attempts = Number(range.value)
+            numberMisses.innerHTML = attempts
+            numberMissesFrom.innerHTML = attempts
+        
+            start.disabled = true
+            reboot.disabled = false
+            document.querySelectorAll('input').forEach(input => {
+                input.disabled = true
+            })
+            board.innerHTML = ''
+            let field = parseInt(size.value) ** 2
+            // console.log(field);
+            for (let i = 1; i <= field; i++) {
+                let div = document.createElement('div')
+                div.classList.add('cell')
+                div.setAttribute('data-num', `${i}`)
+                div.innerHTML = i
+                board.append(div)
+            }
+        
+            let interval = setInterval(timer, 1000);
+        
+            let cells = document.querySelectorAll('.cell');
+            let arr = [];
+            let numberCells = document.querySelector('.activeCells')
+            let returnArr = randomNum(0, field)
+            
+            board.style.width = `${(cells[0].offsetWidth+4) * parseInt(size.value)}px`
+            board.style.height = `${(cells[0].offsetWidth+4) * parseInt(size.value)}px`
+            returnArr.forEach(item => {
+                cells[item].classList.add('cell-active')
+            })
+        
+            cells.forEach(item => {
+                item.addEventListener('click', () => {
+                    if(item.classList.contains('cell-active') && !item.classList.contains('show-active')) {
+                        if (!item.classList.contains('active-cell__select')) {
+                            item.style.background = 'green'
+                            counter++
+                            item.classList.add('active-cell__select')
+                            if(counter == parseInt(numberCells.value)) {
+                                clearInterval(interval)
+                                setDisabled()
+                                board.innerHTML = `
+                                <div class="game-over">
+                                    <div class="game-over__title">Вы выиграли</div>
+                                    <div class="game-over__time">Вы справились за ${secund} секунд</div>
+                                    <div class="game-over__counter">Ваш счет: <span class="recruited">${counter}</span></div>         
+                                    <div class="game-over__miss">Ваши промахи: <span class="miss">${miss}</span></div>
+                                </div>
+                                `
+                                secund = 0
+                                seconds.innerHTML = `00`
+                            }
+                        }
+                    } else if(item.classList.contains('show-active')) {
+                        item.style.background = ''
+                    } else {
+                        item.style.background = 'red'
+                        miss++
+                        attempts--
+                        numberMisses.innerHTML = attempts
+                        
+                        if (attempts == 0) {
+                            gameOver()
+                        }
+                    }
+                })
+            });
+        
+            function gameOver() {
+                clearInterval(interval)
+                secund = 0
+                setDisabled()
+                seconds.innerHTML = `00`
+                board.innerHTML = `
+                    <div class="game-over">
+                        <div class="game-over__title">Вы проиграли<br>Вы достигли истратили<br>лимит промахов</div>
+                        <div class="game-over__counter">Вы смогли отгадать <span class="recruited">${counter}</span> ячеек</div>
+                    </div>
+                `
+            }
+        
+            function randomNum(max, min) {
+                while (arr.length < parseInt(numberCells.value)) {
+                    let number = Math.floor(Math.random() * (max-min)+min)
+                    if (!arr.includes(number)) {
+                        arr.push(number)
                     }
                 }
-            } else if(item.classList.contains('show-active')) {
-                item.style.background = ''
-            } else {
-                item.style.background = 'red'
-                miss++
-                attempts--
-                numberMisses.innerHTML = attempts
-                
-                if (attempts == 0) {
-                    gameOver()
-                }
+                return arr
             }
-        })
-    });
-
-    function gameOver() {
-        clearInterval(interval)
-        secund = 0
-        setDisabled()
-        seconds.innerHTML = `00`
-        board.innerHTML = `
-            <div class="game-over">
-                <div class="game-over__title">Вы проиграли<br>Вы достигли истратили<br>лимит промахов</div>
-                <div class="game-over__counter">Вы смогли отгадать <span class="recruited">${counter}</span> ячеек</div>
-            </div>
-        `
-    }
-
-    function randomNum(max, min) {
-        while (arr.length < parseInt(numberCells.value)) {
-            let number = Math.floor(Math.random() * (max-min)+min)
-            if (!arr.includes(number)) {
-                arr.push(number)
+            
+            function showCells() {
+                let timeInput = document.querySelector('.timeInput')
+                let time = parseInt(timeInput.value) * 1000
+                cells.forEach(item => {
+                    if (item.classList.contains('cell-active')) {
+                        item.classList.add('show-active')
+                    }
+                })
+        
+                setTimeout(() => {
+                    cells.forEach(item => {
+                        if (item.classList.contains('show-active')) {
+                            item.classList.remove('show-active')
+                        }
+                    })
+                }, time);
             }
-        }
-        return arr
-    }
-    
-    function showCells() {
-        let timeInput = document.querySelector('.timeInput')
-        let time = parseInt(timeInput.value) * 1000
-        cells.forEach(item => {
-            if (item.classList.contains('cell-active')) {
-                item.classList.add('show-active')
-            }
-        })
-
-        setTimeout(() => {
-            cells.forEach(item => {
-                if (item.classList.contains('show-active')) {
-                    item.classList.remove('show-active')
-                }
+            showCells()
+        
+            reboot.addEventListener('click', () => {
+                clearInterval(interval)
+                secund = 0
+                seconds.innerHTML = `00`
+                board.innerHTML = `
+                    <div class="game-over">
+                        <div class="game-over__title">Вы завершили игру</div>
+                        <div class="game-over__counter">Чтобы начать нажмите на кнопку<br><i>Начать</div>
+                    </div>
+                `
+                setDisabled()
             })
-        }, time);
+        } else {
+            board.querySelector('.game-over .game-over__title').innerHTML = 'Не допустимый размер'
+            board.querySelector('.game-over .game-over__counter').innerHTML = 'Уменьшите размер поля и нажмите<br><i>Начать</i>'
+        }        
+    } else {
+        alert('Число активных ячеек должно быть меньше всех ячеек хотя бы на 1')
     }
-    showCells()
 
-    reboot.addEventListener('click', () => {
-        clearInterval(interval)
-        secund = 0
-        seconds.innerHTML = `00`
-        board.innerHTML = `
-            <div class="game-over">
-                <div class="game-over__title">Вы завершили игру</div>
-                <div class="game-over__counter">Чтобы начать нажмите на кнопку<br><i>Начать</div>
-            </div>
-        `
-        setDisabled()
-    })
+    // ===========
+
 }
-
-window.addEventListener('resize', () => {
-    
-    // let board = document.querySelector('.board')
-    // board.innerHTML = ''
-    // document.querySelector('.size-error').style.display = 'block'
-
-
-    // let board = document.querySelector('.board')
-    // let html = `
-    //     <div class="size-error">
-    //         Данная игра недоступна выбранном размере экрана<br>
-    //         Пожалуйства увеличьте размер
-    //     </div>
-    // `
-    // board.innerHTML = ''
-    // board.insertAdjacentHTML('afterbegin', html)
-})
