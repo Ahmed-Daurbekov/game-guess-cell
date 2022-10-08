@@ -45,6 +45,8 @@ range.addEventListener('input', () => {
 })
 
 function game() {
+    // console.log(document.querySelector('.board').offsetWidth);
+    // ===========
     counter = 0
     miss = 0
 
@@ -59,7 +61,7 @@ function game() {
     })
     board.innerHTML = ''
     let field = parseInt(size.value) ** 2
-    
+    // console.log(field);
     for (let i = 1; i <= field; i++) {
         let div = document.createElement('div')
         div.classList.add('cell')
@@ -84,21 +86,24 @@ function game() {
     cells.forEach(item => {
         item.addEventListener('click', () => {
             if(item.classList.contains('cell-active') && !item.classList.contains('show-active')) {
-                item.style.background = 'green'
-                counter++
-                if(counter == parseInt(numberCells.value)) {
-                    clearInterval(interval)
-                    setDisabled()
-                    board.innerHTML = `
-                    <div class="game-over">
-                        <div class="game-over__title">Вы выиграли</div>
-                        <div class="game-over__time">Вы справились за ${secund} секунд</div>
-                        <div class="game-over__counter">Ваш счет: <span class="recruited">${counter}</span></div>         
-                        <div class="game-over__miss">Ваши промахи: <span class="miss">${miss}</span></div>
-                    </div>
-                    `
-                    secund = 0
-                    seconds.innerHTML = `00`
+                if (!item.classList.contains('active-cell__select')) {
+                    item.style.background = 'green'
+                    counter++
+                    item.classList.add('active-cell__select')
+                    if(counter == parseInt(numberCells.value)) {
+                        clearInterval(interval)
+                        setDisabled()
+                        board.innerHTML = `
+                        <div class="game-over">
+                            <div class="game-over__title">Вы выиграли</div>
+                            <div class="game-over__time">Вы справились за ${secund} секунд</div>
+                            <div class="game-over__counter">Ваш счет: <span class="recruited">${counter}</span></div>         
+                            <div class="game-over__miss">Ваши промахи: <span class="miss">${miss}</span></div>
+                        </div>
+                        `
+                        secund = 0
+                        seconds.innerHTML = `00`
+                    }
                 }
             } else if(item.classList.contains('show-active')) {
                 item.style.background = ''
@@ -163,10 +168,28 @@ function game() {
         seconds.innerHTML = `00`
         board.innerHTML = `
             <div class="game-over">
-                <div class="game-over__title">Вы завершили игру заного</div>
+                <div class="game-over__title">Вы завершили игру</div>
                 <div class="game-over__counter">Чтобы начать нажмите на кнопку<br><i>Начать</div>
             </div>
         `
         setDisabled()
-    })    
+    })
 }
+
+window.addEventListener('resize', () => {
+    
+    // let board = document.querySelector('.board')
+    // board.innerHTML = ''
+    // document.querySelector('.size-error').style.display = 'block'
+
+
+    // let board = document.querySelector('.board')
+    // let html = `
+    //     <div class="size-error">
+    //         Данная игра недоступна выбранном размере экрана<br>
+    //         Пожалуйства увеличьте размер
+    //     </div>
+    // `
+    // board.innerHTML = ''
+    // board.insertAdjacentHTML('afterbegin', html)
+})

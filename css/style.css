@@ -1,7 +1,6 @@
 body {
     padding: 0;
     margin: 0;
-    overflow: hidden;
 }
 
 .wrapper {
@@ -12,6 +11,7 @@ body {
     flex-direction: column;
     align-items: center;
     padding: 15px 0;
+    overflow: auto;
 }
 
 .show-active {
@@ -35,6 +35,7 @@ body {
 }
 .timer {
     display: flex;
+    align-items: center;
 }
 .timer span {
     font-size: 24px;
@@ -70,6 +71,7 @@ label {
 }
 
 .field {
+    padding: 0 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -117,4 +119,11 @@ label {
 
 .game-over__counter, .game-over__miss, .game-over__time {
     font-size: 30px;
+}
+
+.size-error {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
 }
